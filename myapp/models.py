@@ -21,8 +21,8 @@ class Difficulty(models.Model):
 class Body_part(models.Model):
     body_part = models.CharField(max_length=50, unique=True,verbose_name='body part',help_text='body part',default='Full body')
     class Meta:
-        verbose_name = 'body part'
-        verbose_name_plural = 'body parts'
+        verbose_name = 'body_part'
+        verbose_name_plural = 'body_parts'
         ordering = ['body_part']
 
     def __str__(self):
@@ -46,18 +46,12 @@ class Exercise(models.Model):
         null=True,
         verbose_name='Plakát ',
         help_text='grafický soubor')
-    difficulty = models.ManyToManyField(
+    difficulties = models.ManyToManyField(
         Difficulty,
-        verbose_name='Difficulty',
-        help_text='Difficulty')
-    equipment = models.ManyToManyField(
-        Equipment,
-        verbose_name='equipment',
-        help_text='equipment')
-    body_part = models.ManyToManyField(
-        Body_part,
-        verbose_name='body_part',
-        help_text='body_part')
+        verbose_name='difficulties')
+    equipments = models.ManyToManyField(Equipment)
+    obsah = models.TextField(blank=True, verbose_name='obsah', help_text='obsah')
+    body_parts = models.ManyToManyField(Body_part)
     class Meta:
         verbose_name = 'exercise'
         verbose_name_plural = 'exercises'

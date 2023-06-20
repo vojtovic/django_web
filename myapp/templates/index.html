@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-8 mt-3 mb-3">
+            <h2 class="bg-warning text-black text-center text-uppercase p-3">{{ nadpis }}</h2>
+            {% for exercise in exercises %}
+            <div class="row mb-3">
+                <div class="col-lg-3">
+                    <img src="{{ exercise.poster.url }}" alt="{{ exercise.name }}" class="img-fluid">
+                </div>
+                <div class="col-lg-9 ">
+                    <h3><a class="text-warning" href="{% url 'exercise_detail' exercise.id %}">{{ exercise.name }}</a></h3>
+                {% for difficulty in exercise.difficulties.all %}
+                    <span class="badge badge-secondary text-warning">{{ difficulty.name }}</span>
+                {% endfor %}
+                {% for equipment in exercise.equipments.all %}
+
+                    <span class="badge badge-secondary text-warning">{{ equipment.equipment }}</span>
+                {% endfor %}
+                {% for body_part in exercise.body_parts.all %}
+
+                    <span class="badge badge-secondary text-warning">{{ body_part.body_part }}</span>
+                {% endfor %}
+
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-4 bg-black mt-3 mb-3">
+            <h2 class="bg-warning text-black text-center p-3">BODY PART</h2>
+            <ul class="list-group">
+            {% for body_part in body_parts %}
+                {% if body_part.name == nadpis %}
+                <li class="list-group-item active">{{ body_part.body_part }}</li>
+                {% else %}
+                <li class="list-group-item  bg-secondary"><a href="#" class="text-warning">{{ body_part.body_part }}</a></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+
+<br>
+        <h2 class="bg-warning text-black text-center p-3">EXPERIENCE</h2>
+            <ul class="list-group">
+            {% for difficulty in difficulties %}
+                {% if body_part.name == nadpis %}
+                <li class="list-group-item active">{{ difficulty.name }}</li>
+                {% else %}
+                <li class="list-group-item  bg-secondary"><a href="#" class="text-warning">{{ difficulty.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+
+
+<br>
+        <h2 class="bg-warning text-black text-center p-3">EQUIPMENT</h2>
+            <ul class="list-group">
+            {% for equipment in equipments %}
+                {% if body_part.name == nadpis %}
+                <li class="list-group-item active">{{ equipment.equipment }}</li>
+                {% else %}
+                <li class="list-group-item  bg-secondary"><a href="#" class="text-warning">{{ equipment.equipment }}</a></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+
+        </div>
+
+{% endblock %}

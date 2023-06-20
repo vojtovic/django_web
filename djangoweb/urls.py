@@ -23,7 +23,7 @@ from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('myapp/', include('myapp.urls')),
+    path('database/', include('myapp.urls')),
     path('', RedirectView.as_view(url='myapp/')),
 ]
 
